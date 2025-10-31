@@ -1,0 +1,105 @@
+version: '3.8' # Pode apagar esta linha
+
+services:
+  postgres:
+    # ... (sem alterações) ...
+    image: postgres:15
+    container_name: godlevel-db
+    environment:
+      POSTGRES_DB: challenge_db
+      POSTGRES_USER: challenge
+      POSTGRES_PASSWORD: challenge_2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U challenge -d challenge_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api
+    container_name: godlevel-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://challenge:challenge_2024@postgres:5432/challenge_db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./api:/app
+    healthcheck:
+      # LINHA ALTERADA: Usa 'curl -f' em vez de 'httpx'
+      # 'curl -f' falha (retorna erro) se o status HTTP for > 400
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/ | grep 'message'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    # ... (sem alterações) ...
+    build:
+      context: ./frontend
+    container_name: godlevel-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+  test:
+    # ... (sem alterações) ...
+    build:
+      context: ./api 
+    container_name: godlevel-test
+    depends_on:
+      api:
+        condition: service_healthy 
+    environment:
+      API_URL: http://api:8000 
+    command: ["pytest", "-v"]
+
+  data-generator:
+    # ... (sem alterações) ...
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: godlevel-data-gen
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://challenge:challenge_2024@postgres:5432/challenge_db
+    command: >
+      sh -c "
+        echo 'Waiting for database to be ready...' &&
+        sleep 5 &&
+        echo 'Generating challenge data...' &&
+        python generate_data.py --db-url postgresql://challenge:challenge_2024@postgres:5432/challenge_db
+      "
+    profiles:
+      - tools
+    
+  pgadmin:
+    # ... (sem alterações) ...
+    image: dpage/pgadmin4:latest
+    container_name: godlevel-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@godlevel.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    driver: local
+
