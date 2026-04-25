@@ -1,89 +1,89 @@
-# 📊 Como Avaliaremos sua Solução
+# 📊 How the Solution Was Evaluated
 
-## Princípios
+## Principles
 
-Não existe "resposta certa". Avaliaremos **como você pensa**, não se seguiu um checklist.
+There is no "right answer". The focus was on **how to think**, not on following a checklist.
 
-## Critérios
+## Criteria
 
-### 1. Solução do Problema
+### 1. Problem Solving
 
-**A solução resolve a dor do usuário?**
+**Does the solution address the user's pain?**
 
-- Quanto você sabe sabre o usuário?
-- A interface é intuitiva para um não-técnico?
-- Permite exploração livre dos dados?
-- Gera insights, não apenas mostra números?
+- How well is the user understood?
+- Is the interface intuitive for a non-technical user?
+- Does it allow free data exploration?
+- Does it generate insights, not just display numbers?
 
-### 2. Arquitetura e Engenharia
+### 2. Architecture and Engineering
 
-**Decisões técnicas bem fundamentadas?**
+**Well-founded technical decisions?**
 
-- Arquitetura adequada ao problema?
-- Trade-offs bem pensados? (documentação)
-- Código limpo, testável, manutenível?
+- Architecture appropriate to the problem?
+- Well-considered trade-offs? (documented)
+- Clean, testable, maintainable code?
 
-### 3. Performance e Escala
+### 3. Performance and Scale
 
-**A solução é viável em produção?**
+**Is the solution viable in production?**
 
-- Queries otimizadas (< 1s para 500k registros)?
-- Frontend responsivo e fluido?
-- Estratégia de cache/otimização?
+- Optimized queries (< 1s for 500k records)?
+- Responsive and fluid frontend?
+- Cache/optimization strategy?
 
-### 4. UX e Usabilidade
+### 4. UX and Usability
 
-**É agradável de usar?**
+**Is it pleasant to use?**
 
-- Design moderno e funcional?
-- Feedback visual adequado?
+- Modern and functional design?
+- Adequate visual feedback?
 - Mobile-friendly?
-- Acessibilidade básica?
+- Basic accessibility?
 
-### 5. Metodologia de trabalho e entrega
+### 5. Work methodology and delivery
 
-**Quão organizada e bem documentada é sua jornada e sua entrega?**
+**How organized and well-documented is the journey and delivery?**
 
-- Comunicação clara e eficiente
-- Entregas bem documentadas
-- Vídeo de apresentação sucinto e relevante
+- Clear and efficient communication
+- Well-documented deliverables
+- Concise and relevant presentation
 
-## Pontos Extras
+## Bonus Points
 
-- Testes automatizados
-- Deploy funcional em cloud
-- Features inovadoras não solicitadas
-- Insights automáticos/IA
+- Automated tests
+- Functional cloud deploy
+- Innovative features
+- Automatic insights / AI
 
-## O que NÃO avaliamos
+## What was NOT evaluated
 
-- Se você usou a stack X ou Y
-- Se você seguiu padrão A ou B
-- Quantidade de código
-- Se você implementou tudo que imaginamos
+- Whether stack X or Y was used
+- Whether pattern A or B was followed
+- Amount of code
+- Whether everything imagined was implemented
 
-## O que avaliamos MUITO
+## What was evaluated MOST
 
-- **Documentação de decisões**: Por que arquitetura X? Por que não Y?
-- **Code quality**: SOLID, DRY, nomes claros, testes
-- **Empatia com usuário**: Você entendeu o problema da Maria?
-- **Profissionalismo**: README claro, setup funcionando, demo bem preparado
+- **Decision documentation**: Why architecture X? Why not Y?
+- **Code quality**: SOLID, DRY, clear names, tests
+- **User empathy**: Was the problem understood?
+- **Professionalism**: Clear README, working setup, well-prepared demo
 
-## Dicas
+## Tips
 
-**Invista tempo em**:
-- Entender o problema e o usuário
-- Design da arquitetura
-- UX simples e efetiva
-- Documentação de decisões
+**Invest time in**:
+- Understanding the problem and the user
+- Architecture design
+- Simple and effective UX
+- Decision documentation
 
-**Não perca tempo em**:
-- Features não essenciais
+**Don't waste time on**:
+- Non-essential features
 - Over-engineering
-- Tecnologias só porque são "cool"
-- Perfeição em detalhes irrelevantes
+- Technologies just because they're "cool"
+- Perfection in irrelevant details
 
 ---
 
-**Queremos ver como você pensa, não apenas como você codifica.**
+**The goal was to show how you think, not just how you code.**
 

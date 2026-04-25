@@ -1,130 +1,130 @@
-# 🍔 O Problema: Analytics para Restaurantes
+# 🍔 The Problem: Analytics for Restaurants
 
-## Contexto
+## Context
 
-Você foi contratado como tech lead para resolver um problema crítico que afeta 10.000+ restaurantes no Brasil.
+This project was built to solve a critical problem that affects thousands of restaurants.
 
-## A Persona
+## The Persona
 
-**Maria**, dona de 3 restaurantes em São Paulo:
-- Vende através de 5 canais (balcão, iFood, Rappi, WhatsApp, app próprio)
-- Tem 200+ produtos no cardápio
-- Faz ~1.500 pedidos/semana
-- Precisa tomar decisões diárias sobre estoque, preços, promoções
+**Maria**, owner of 3 restaurants in São Paulo:
+- Sells through 5 channels (counter, iFood, Rappi, WhatsApp, own app)
+- Has 200+ products on the menu
+- Receives ~1,500 orders/week
+- Needs to make daily decisions about inventory, prices, and promotions
 
-### Dores Atuais
+### Current Pain Points
 
-**Hoje, Maria não consegue responder**:
-- "Qual produto vende mais na quinta à noite no iFood?"
-- "Meu ticket médio está caindo. É por canal ou por loja?"
-- "Quais produtos têm menor margem e devo repensar o preço?"
-- "Meu tempo de entrega piorou. Em quais dias/horários?"
-- "Quais clientes compraram 3+ vezes mas não voltam há 30 dias?"
+**Today, Maria can't answer**:
+- "Which product sells the most on Thursday nights on iFood?"
+- "My average ticket is dropping. Is it by channel or by store?"
+- "Which products have the lowest margin and should I rethink their price?"
+- "My delivery time has worsened. On which days/hours?"
+- "Which customers bought 3+ times but haven't returned in 30 days?"
 
-**Ela tem os dados, mas não consegue explorá-los.**
+**She has the data, but can't explore it.**
 
-Dashboards fixos mostram apenas visões pré-definidas. Power BI é complexo demais e genérico. Ela não tem time de dados.
+Fixed dashboards only show pre-defined views. Power BI is too complex and generic. She doesn't have a data team.
 
-## O Desafio Real
+## The Real Challenge
 
-Donos de restaurantes precisam de **analytics customizável e flexível**:
-- Simples o suficiente para usar sem treinamento técnico
-- Poderoso o suficiente para responder perguntas complexas
-- Específico ao domínio (métricas de restaurante, não genéricas)
+Restaurant owners need **customizable and flexible analytics**:
+- Simple enough to use without technical training
+- Powerful enough to answer complex questions
+- Domain-specific (restaurant metrics, not generic ones)
 
-## Dados Disponíveis
+## Available Data
 
-Maria tem acesso a:
+Maria has access to:
 
-### Vendas (núcleo)
-- Valor total, itens, descontos, taxas
-- Horário, data, canal, loja
-- Status (completa, cancelada)
-- Tempos (preparo, entrega)
+### Sales (core)
+- Total value, items, discounts, fees
+- Time, date, channel, store
+- Status (completed, cancelled)
+- Times (preparation, delivery)
 
-### Produtos
-- Nome, categoria, preço
-- Vendidos em cada pedido
-- Com opções/complementos
+### Products
+- Name, category, price
+- Sold in each order
+- With options/add-ons
 
-### Clientes
-- Nome, contato, histórico
-- Frequência de compra
-- Ticket médio
+### Customers
+- Name, contact, history
+- Purchase frequency
+- Average ticket
 
-### Operacional
-- Canais e suas comissões
-- Performance por loja
-- Métodos de pagamento
+### Operational
+- Channels and their commissions
+- Store performance
+- Payment methods
 
-## O que "Boa Solução" Significa
+## What "Good Solution" Means
 
-Uma boa solução permite Maria:
+A good solution allows Maria to:
 
-1. **Explorar dados livremente**
-   - Sem depender de desenvolvedores
-   - Criando visualizações customizadas
-   - Filtrando por qualquer dimensão
+1. **Explore data freely**
+   - Without depending on developers
+   - Creating custom visualizations
+   - Filtering by any dimension
 
-2. **Obter insights acionáveis**
-   - Não apenas números, mas significado
-   - Comparações temporais
-   - Identificação de anomalias
+2. **Get actionable insights**
+   - Not just numbers, but meaning
+   - Temporal comparisons
+   - Anomaly identification
 
-3. **Compartilhar com o time**
-   - Gerente de loja vê sua performance
-   - Time de marketing vê produtos populares
-   - Sócio vê overview financeiro
+3. **Share with the team**
+   - Store manager sees their performance
+   - Marketing team sees popular products
+   - Business partner sees financial overview
 
-## Restrições Técnicas
+## Technical Constraints
 
-Você **deve usar** o banco de dados PostgreSQL fornecido (500k vendas).
+The PostgreSQL database is provided (500k sales).
 
-Tudo além disso é **sua decisão arquitetural**:
-- Stack tecnológico
-- Arquitetura (monolito, microserviços, serverless)
+Everything else is an **architectural decision**:
+- Technology stack
+- Architecture (monolith, microservices, serverless)
 - Frontend framework
-- Estratégia de cache
+- Cache strategy
 - Deployment
 
-## Não-Requisitos
+## Non-Requirements
 
-Você **não precisa**:
-- Construir sistema de autenticação completo (mock básico serve)
-- Integrar com sistemas externos
-- Suportar multi-tenancy
-- Escalar para milhões de usuários
+Not needed:
+- Full authentication system (basic mock is fine)
+- External system integrations
+- Multi-tenancy support
+- Scaling to millions of users
 
-Foque em resolver o problema core: **analytics customizável e flexível**.
+Focus on solving the core problem: **customizable and flexible analytics**.
 
-## Perguntas para Guiar Seu Design
+## Questions to Guide the Design
 
-1. Como um usuário não-técnico criaria um dashboard?
-2. Como garantir queries rápidas mesmo com milhões de registros?
-3. Qual o trade-off entre flexibilidade e simplicidade?
-4. Como tornar insights visíveis, não apenas dados?
-5. O que diferencia analytics de restaurante de analytics genérico?
+1. How would a non-technical user create a dashboard?
+2. How to ensure fast queries even with millions of records?
+3. What is the trade-off between flexibility and simplicity?
+4. How to make insights visible, not just data?
+5. What differentiates restaurant analytics from generic analytics?
 
-## Inspirações
+## Inspirations
 
-Não copie, mas inspire-se:
-- **Metabase**: Simplicidade de query builder
-- **Looker**: Modelagem de negócio
-- **Amplitude**: UX de analytics
-- **Grafana**: Flexibilidade de visualizações
-- **Sheets/Excel (Pivot Tables)**: Flexibilidade/adaptabilidade de visualizações
+Not to copy, but to inspire:
+- **Metabase**: Query builder simplicity
+- **Looker**: Business modeling
+- **Amplitude**: Analytics UX
+- **Grafana**: Visualization flexibility
+- **Sheets/Excel (Pivot Tables)**: Visualization flexibility/adaptability
 
-## Critérios de Sucesso
+## Success Criteria
 
-Maria deveria conseguir, em **< 5 minutos**:
-1. Ver overview do faturamento do mês
-2. Identificar os 10 produtos mais vendidos no delivery
-3. Comparar performance de duas lojas
-4. Exportar relatório para apresentar ao sócio
+Maria should be able to, in **< 5 minutes**:
+1. See a revenue overview for the month
+2. Identify the top 10 best-selling products in delivery
+3. Compare performance of two stores
+4. Export a report to present to a business partner
 
-Se sua solução permite isso de forma intuitiva, você está no caminho certo.
+If the solution enables this intuitively, it is on the right track.
 
 ---
 
-**Este é um problema real que afeta milhares de restaurantes. Como você o resolveria?**
+**This is a real problem that affects thousands of restaurants.**
 

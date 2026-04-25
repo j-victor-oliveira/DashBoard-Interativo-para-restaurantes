@@ -1,40 +1,40 @@
-# 📊 Estrutura de Dados
+# 📊 Data Structure
 
-## Visão Geral
+## Overview
 
-Esse documento descreve a característica de geração de dados adotada pelo script generate_data.py
+This document describes the data generation characteristics adopted by the `generate_data.py` script.
 
-Resultado final: Banco PostgreSQL com **6 meses de dados operacionais** de restaurantes, espelhando o sistema real da Arcca que gerencia 1000+ estabelecimentos.
+Final result: PostgreSQL database with **6 months of operational data** from restaurants, mirroring a real system managing 1,000+ establishments.
 
-## Schema Principal
+## Main Schema
 
-### Hierarquia de Vendas
+### Sales Hierarchy
 
 ```
-Sale (Venda)
-├── Store (Loja)
-├── Channel (Canal: presencial/delivery)
-├── Customer (Cliente - opcional, 70% identificados)
+Sale
+├── Store
+├── Channel (in-person/delivery)
+├── Customer (optional, 70% identified)
 │
-├── ProductSales[] (1-5 produtos por venda)
+├── ProductSales[] (1-5 products per sale)
 │   ├── Product
-│   └── ItemProductSales[] (customizações: "sem cebola", "+bacon")
-│       ├── Item (complemento/adicional)
-│       ├── OptionGroup (grupo: "Adicionais", "Remover")
-│       └── ItemItemProductSales[] (itens em itens - nested)
+│   └── ItemProductSales[] (customizations: "no onion", "+bacon")
+│       ├── Item (add-on/extra)
+│       ├── OptionGroup (group: "Add-ons", "Remove")
+│       └── ItemItemProductSales[] (nested items)
 │
-├── Payments[] (1-2 formas de pagamento)
+├── Payments[] (1-2 payment methods)
 │   └── PaymentType
 │
-└── DeliverySale (se delivery)
-    ├── Courier info (entregador)
+└── DeliverySale (if delivery)
+    ├── Courier info
     └── DeliveryAddress
 ```
 
-### Tabelas Core
+### Core Tables
 
 ```sql
--- Vendas (núcleo)
+-- Sales (core)
 sales (
     id, store_id, channel_id, customer_id, sub_brand_id,
     created_at, customer_name, sale_status_desc,
@@ -44,25 +44,25 @@ sales (
     discount_reason, origin
 )
 
--- Produtos vendidos
+-- Sold products
 product_sales (
     id, sale_id, product_id,
     quantity, base_price, total_price, observations
 )
 
--- Customizações de produtos (ex: "Hamburguer + Bacon + Queijo extra")
+-- Product customizations (e.g.: "Burger + Bacon + Extra Cheese")
 item_product_sales (
     id, product_sale_id, item_id, option_group_id,
     quantity, additional_price, price, observations
 )
 
--- Customizações nested (ex: "Bacon + Cheddar cremoso")
+-- Nested customizations (e.g.: "Bacon + Creamy Cheddar")
 item_item_product_sales (
     id, item_product_sale_id, item_id, option_group_id,
     quantity, additional_price, price
 )
 
--- Dados de entrega (apenas pedidos delivery)
+-- Delivery data (delivery orders only)
 delivery_sales (
     id, sale_id,
     courier_name, courier_phone, courier_type,
@@ -75,156 +75,156 @@ delivery_addresses (
     city, state, postal_code, latitude, longitude
 )
 
--- Pagamentos (venda pode ter múltiplos)
+-- Payments (a sale can have multiple)
 payments (
     id, sale_id, payment_type_id, value, is_online
 )
 
--- Catálogo
+-- Catalog
 products (id, brand_id, category_id, name)
-items (id, brand_id, category_id, name)  -- Complementos
-option_groups (id, brand_id, name)  -- Grupos de opções
-categories (id, brand_id, name, type)  -- 'P' produto, 'I' item
+items (id, brand_id, category_id, name)  -- Add-ons
+option_groups (id, brand_id, name)  -- Option groups
+categories (id, brand_id, name, type)  -- 'P' product, 'I' item
 
--- Entidades
+-- Entities
 stores (id, name, city, state, is_active, is_own)
-channels (id, name, type)  -- 'P' presencial, 'D' delivery
+channels (id, name, type)  -- 'P' in-person, 'D' delivery
 customers (id, customer_name, email, phone_number, birth_date)
 payment_types (id, description)
 ```
 
-## Volume de Dados
+## Data Volume
 
 ```
-50 lojas → 500.000 vendas → 1.2M produtos vendidos → 800k customizações
+50 stores → 500,000 sales → 1.2M products sold → 800k customizations
          ↓
-   10k clientes (70% das vendas identificadas)
+   10k customers (70% of sales identified)
 ```
 
-### Distribuição
+### Distribution
 
-**Vendas por canal**:
-- Presencial: 40% (~200k vendas)
+**Sales by channel**:
+- In-person: 40% (~200k sales)
 - iFood: 30% (~150k)
 - Rappi: 15% (~75k)
-- Outros: 15% (~75k)
+- Others: 15% (~75k)
 
-**Produtos**:
-- 500 produtos base
-- 200 items/complementos
-- Média 2.4 produtos por venda
-- 60% das vendas têm customizações
+**Products**:
+- 500 base products
+- 200 items/add-ons
+- Average 2.4 products per sale
+- 60% of sales have customizations
 
-**Clientes**:
-- 10.000 cadastrados
-- 30% vendas são "guest" (sem cadastro)
-- Distribuição: 70% compraram 1-3x, 20% 4-10x, 10% 10+x
+**Customers**:
+- 10,000 registered
+- 30% of sales are "guest" (no registration)
+- Distribution: 70% bought 1-3x, 20% 4-10x, 10% 10+x
 
-## Padrões Temporais
+## Temporal Patterns
 
-### Intra-dia
+### Intra-day
 ```
-00-06h: 2% das vendas
+00-06h: 2% of sales
 06-11h: 8%
-11-15h: 35% ⚡ (almoço)
+11-15h: 35% ⚡ (lunch)
 15-19h: 10%
-19-23h: 40% ⚡ (jantar)
+19-23h: 40% ⚡ (dinner)
 23-24h: 5%
 ```
 
-### Semanal
+### Weekly
 ```
-Segunda:  -20% vs média
-Terça:    -10%
-Quarta:    -5%
-Quinta:     0% (baseline)
-Sexta:    +30%
-Sábado:   +50% ⚡
-Domingo:  +40%
+Monday:    -20% vs average
+Tuesday:   -10%
+Wednesday:  -5%
+Thursday:    0% (baseline)
+Friday:    +30%
+Saturday:  +50% ⚡
+Sunday:    +40%
 ```
 
-### Mensal
-- Crescimento gradual: ~2-3% mês a mês
-- Variação aleatória: ±10%
+### Monthly
+- Gradual growth: ~2-3% month over month
+- Random variation: ±10%
 
-## Dados Realistas
+## Realistic Data
 
-### Valores Típicos
+### Typical Values
 
 ```
-Ticket médio geral: R$ 65
-├── Presencial: R$ 45-55
+General average ticket: R$ 65
+├── In-person: R$ 45-55
 ├── iFood: R$ 70-85
 └── Rappi: R$ 65-80
 
-Tempos operacionais:
-├── Preparo: 5-40 min (média 18 min)
-└── Entrega: 15-60 min (média 35 min)
+Operational times:
+├── Preparation: 5-40 min (avg 18 min)
+└── Delivery: 15-60 min (avg 35 min)
 
-Taxas:
-├── Cancelamento: ~5%
-├── Com desconto: ~20%
-└── Com customização: ~60%
+Rates:
+├── Cancellation: ~5%
+├── With discount: ~20%
+└── With customization: ~60%
 ```
 
-### Anomalias Injetadas
+### Injected Anomalies
 
-Propositalmente incluímos para testar analytics:
+Intentionally included to test analytics:
 
-1. **Semana problemática**: Queda de 30% em vendas (simula problema operacional)
-2. **Dia promocional**: Pico de 3x (Black Friday, promoção)
-3. **Loja crescendo**: Uma loja específica com crescimento linear de 5%/mês
-4. **Produto sazonal**: Alguns produtos vendem 80% mais em determinados meses
+1. **Problematic week**: 30% drop in sales (simulates operational issue)
+2. **Promotional day**: 3x peak (Black Friday, promotion)
+3. **Growing store**: One specific store with 5%/month linear growth
+4. **Seasonal product**: Some products sell 80% more in certain months
 
-**Sua solução deve permitir identificar esses padrões.**
+**The solution should allow identifying these patterns.**
 
-## Complexidade dos Dados
+## Data Complexity
 
-### Exemplo Real de Venda
+### Real Sale Example
 
 ```
-Venda #12345
-├── Loja: "Burguer House - Centro SP"
-├── Canal: iFood
-├── Cliente: João Silva (identificado)
-├── Total: R$ 87,50
+Sale #12345
+├── Store: "Burguer House - Centro SP"
+├── Channel: iFood
+├── Customer: João Silva (identified)
+├── Total: R$ 87.50
 │
-├── Produtos:
-│   ├── X-Bacon Duplo (R$ 32,00)
-│   │   ├── + Bacon extra (R$ 5,00)
-│   │   ├── + Cheddar cremoso (R$ 4,00)
-│   │   └── - Cebola (R$ 0,00)
+├── Products:
+│   ├── Double X-Bacon (R$ 32.00)
+│   │   ├── + Extra Bacon (R$ 5.00)
+│   │   ├── + Creamy Cheddar (R$ 4.00)
+│   │   └── - Onion (R$ 0.00)
 │   │
-│   ├── Batata Frita Grande (R$ 18,00)
-│   │   └── + Cheddar (R$ 3,00)
+│   ├── Large French Fries (R$ 18.00)
+│   │   └── + Cheddar (R$ 3.00)
 │   │
-│   └── Refrigerante 2L (R$ 12,00)
+│   └── 2L Soda (R$ 12.00)
 │
-├── Desconto: -R$ 8,50 (cupom fidelidade)
-├── Taxa entrega: +R$ 9,00
-├── Total: R$ 87,50
+├── Discount: -R$ 8.50 (loyalty coupon)
+├── Delivery fee: +R$ 9.00
+├── Total: R$ 87.50
 │
-├── Pagamento: PIX (R$ 87,50)
+├── Payment: PIX (R$ 87.50)
 │
-├── Tempos:
-│   ├── Preparo: 22 minutos
-│   └── Entrega: 38 minutos
+├── Times:
+│   ├── Preparation: 22 minutes
+│   └── Delivery: 38 minutes
 │
-└── Entrega:
-    ├── Entregador: Carlos (iFood)
-    └── Endereço: Rua X, 123, Centro
+└── Delivery:
+    ├── Courier: Carlos (iFood)
+    └── Address: Rua X, 123, Centro
 ```
 
-Esta estrutura permite análises como:
-- "Qual item adicional mais vendido?"
-- "Produtos que mais recebem remoções?"
-- "Tempo de entrega por região?"
-- "Mix de pagamentos por canal?"
+This structure enables analyses such as:
+- "Which add-on item is most sold?"
+- "Products that most receive removals?"
+- "Delivery time by region?"
+- "Payment mix by channel?"
 
-## Queries de Exemplo
+## Example Queries
 
 ```sql
--- Vendas completas com produtos e customizações
+-- Full sales with products and customizations
 SELECT 
     s.id, s.created_at, s.total_amount,
     st.name as store, ch.name as channel,
@@ -243,7 +243,7 @@ WHERE s.sale_status_desc = 'COMPLETED'
 GROUP BY s.id, st.name, ch.name, p.name, ps.quantity
 LIMIT 10;
 
--- Top itens/complementos mais vendidos
+-- Top items/add-ons most sold
 SELECT 
     i.name as item,
     COUNT(*) as times_added,
@@ -257,7 +257,7 @@ GROUP BY i.name
 ORDER BY times_added DESC
 LIMIT 20;
 
--- Performance de entrega por região
+-- Delivery performance by region
 SELECT 
     da.neighborhood,
     da.city,
@@ -273,9 +273,9 @@ HAVING COUNT(*) >= 10
 ORDER BY avg_delivery_minutes DESC;
 ```
 
-## Script de Geração
+## Generation Script
 
-Execute para popular o banco:
+Run to populate the database:
 
 ```bash
 python generate_data.py \
@@ -286,33 +286,34 @@ python generate_data.py \
     --customers 10000
 ```
 
-Isso gera:
-- ~500k vendas
-- ~1.2M produtos vendidos
-- ~800k customizações (items)
-- ~200k entregas com endereço
-- ~600k pagamentos
+This generates:
+- ~500k sales
+- ~1.2M products sold
+- ~800k customizations (items)
+- ~200k deliveries with address
+- ~600k payments
 
-**Tempo estimado**: 5-15 minutos dependendo da máquina.
+**Estimated time**: 5-15 minutes depending on the machine.
 
-## O Que Isso Habilita
+## What This Enables
 
-Com essa estrutura completa, sua solução pode responder:
+With this complete structure, the solution can answer:
 
-- Faturamento total, ticket médio, vendas por dia
-- Rankings de lojas e produtos
-- Performance por canal e horário
-- Taxa de cancelamento e motivos
-- Análise de descontos
-- **Customizações**: Quais items mais vendidos? Quais produtos recebem mais alterações?
-- **Delivery**: Tempo médio por região? Quais bairros mais pedem?
-- **Mix de produtos**: Quais combinações aparecem juntas?
-- **Jornada do cliente**: Frequência, retenção, lifetime value
-- Detecção de anomalias temporais
-- Previsão de demanda por produto
-- Segmentação de clientes
-- Otimização de rotas de entrega
+- Total revenue, average ticket, sales per day
+- Store and product rankings
+- Performance by channel and time of day
+- Cancellation rate and reasons
+- Discount analysis
+- **Customizations**: Which items are most sold? Which products receive the most changes?
+- **Delivery**: Average time by region? Which neighborhoods order the most?
+- **Product mix**: Which combinations appear together?
+- **Customer journey**: Frequency, retention, lifetime value
+- Temporal anomaly detection
+- Demand forecasting by product
+- Customer segmentation
+- Delivery route optimization
 
 ---
 
-**A complexidade dos dados reflete operações reais. Use isso a seu favor para criar analytics ricos.**
+**The complexity of the data reflects real operations. Use this to create rich analytics.**
+
