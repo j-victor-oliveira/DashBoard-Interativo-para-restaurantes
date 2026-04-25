@@ -1,209 +1,208 @@
-# 🚀 Nola Analytics Platform
+# 🚀 Restaurant Analytics Platform
 
-## 📊 Visão Geral
+## 📊 Overview
 
-Uma plataforma avançada de analytics para restaurantes que oferece:
+An advanced analytics platform for restaurants, built as a portfolio project to showcase full-stack engineering skills. The platform offers:
 
-- **Insights Inteligentes**: Análise preditiva e recomendações baseadas em IA
-- **Performance em Tempo Real**: Monitoramento e otimização contínua
-- **Interface Intuitiva**: Design moderno e experiência fluida
-- **Decisões Data-Driven**: Suporte estratégico baseado em dados
+- **Intelligent Insights**: Predictive analysis and AI-based recommendations
+- **Real-Time Performance**: Continuous monitoring and optimization
+- **Intuitive Interface**: Modern design and smooth user experience
+- **Data-Driven Decisions**: Strategic support backed by data
 
-Desenvolvida com tecnologias modernas e arquitetura escalável, a plataforma Nola Analytics 
-transforma dados em decisões estratégicas para o sucesso do seu negócio.
+Built with modern technologies and a scalable architecture, this platform transforms raw data into strategic decisions for restaurant management.
 
-A solução é composta por um Frontend (React), um Backend (API FastAPI) e um Banco de Dados (PostgreSQL), todos orquestrados com Docker.
+The solution consists of a Frontend (React), a Backend (FastAPI API), and a Database (PostgreSQL), all orchestrated with Docker.
 
-## 🌟 Features Principais
+## 🌟 Key Features
 
-### 📈 Dashboard Analytics
-- **KPIs em Tempo Real**
-  - Faturação Total
-  - Ticket Médio
-  - Total de Vendas
-  - Atualização automática
-- **Gráficos Interativos**
-  - Visualização dinâmica
-  - Filtros avançados
-  - Export de dados
+### 📈 Analytics Dashboard
+- **Real-Time KPIs**
+  - Total Revenue
+  - Average Ticket
+  - Total Sales
+  - Automatic refresh
+- **Interactive Charts**
+  - Dynamic visualization
+  - Advanced filters
+  - Data export
 
-### 🛍️ Gestão de Produtos
-- **Análise Detalhada**
-  - Performance individual
-  - Histórico de vendas
-  - Comportamento por canal
-  - Tendências temporais
-- **Insights Automatizados**
-  - Recomendações de preço
-  - Oportunidades de cross-sell
-  - Alertas de performance
+### 🛍️ Product Management
+- **Detailed Analysis**
+  - Individual performance
+  - Sales history
+  - Channel behavior
+  - Temporal trends
+- **Automated Insights**
+  - Pricing recommendations
+  - Cross-sell opportunities
+  - Performance alerts
 
-### 📊 Relatórios Inteligentes
-- **Analytics Flexível**
-  - Métricas personalizáveis
-  - Dimensões configuráveis
-  - Filtros avançados
-  - Períodos customizados
-- **Análise por Dimensão**
-  - Produtos: Performance e tendências
-  - Canais: Eficiência e conversão
-  - Temporal: Padrões e sazonalidade
-  - Geográfica: Distribuição e oportunidades
-- **Sistema de IA**
-  - Análise contextual
-  - Insights automáticos
-  - Recomendações acionáveis
-  - Previsões baseadas em dados
+### 📊 Smart Reports
+- **Flexible Analytics**
+  - Customizable metrics
+  - Configurable dimensions
+  - Advanced filters
+  - Custom time periods
+- **Dimension Analysis**
+  - Products: Performance and trends
+  - Channels: Efficiency and conversion
+  - Temporal: Patterns and seasonality
+  - Geographic: Distribution and opportunities
+- **AI System**
+  - Contextual analysis
+  - Automatic insights
+  - Actionable recommendations
+  - Data-based forecasts
 
 ### 🤖 AI Insights
-- **Análise Preditiva**
-  - Previsão de demanda
-  - Tendências de mercado
-  - Padrões sazonais
-  - Comportamento do consumidor
-- **Otimização de Cardápio**
-  - Composição ideal
-  - Precificação dinâmica
-  - Mix de produtos
-  - Margens otimizadas
-- **Recomendações Estratégicas**
-  - Promoções personalizadas
-  - Combinações lucrativas
-  - Timing ideal
-  - Segmentação inteligente
+- **Predictive Analysis**
+  - Demand forecasting
+  - Market trends
+  - Seasonal patterns
+  - Consumer behavior
+- **Menu Optimization**
+  - Ideal composition
+  - Dynamic pricing
+  - Product mix
+  - Optimized margins
+- **Strategic Recommendations**
+  - Personalized promotions
+  - Profitable combinations
+  - Ideal timing
+  - Smart segmentation
 
-### 🎨 Design e Identidade Visual
-- **Interface Moderna**
-  - Design responsivo
-  - Layout intuitivo
-  - Navegação fluida
-  - Experiência otimizada
-- **Branding Consistente**
-  - Cores da marca
-  - Elementos visuais
-  - Tipografia harmônica
-  - Identidade única
-- **Usabilidade Aprimorada**
-  - Fluxos otimizados
-  - Feedback visual
-  - Interações naturais
-  - Performance ágil
+### 🎨 Design and Visual Identity
+- **Modern Interface**
+  - Responsive design
+  - Intuitive layout
+  - Smooth navigation
+  - Optimized experience
+- **Consistent Branding**
+  - Brand colors
+  - Visual elements
+  - Harmonious typography
+  - Unique identity
+- **Enhanced Usability**
+  - Optimized flows
+  - Visual feedback
+  - Natural interactions
+  - Agile performance
 
-## 🚀 Guia de Instalação
+## 🚀 Installation Guide
 
-### Pré-requisitos
+### Prerequisites
 - Docker Engine 20.10+
 - Docker Compose v2.0+
-- 4GB RAM mínimo recomendado
-- 10GB espaço em disco
+- 4GB RAM minimum recommended
+- 10GB disk space
 
-### Setup Rápido
+### Quick Setup
 
-1. **Preparação dos Dados**
+1. **Data Preparation**
 ```bash
-# Gera dataset de exemplo com +500k registros
+# Generates a sample dataset with 500k+ records
 docker compose run --rm data-generator
 ```
 
-2. **Inicialização da Plataforma**
+2. **Platform Initialization**
 ```bash
-# Constrói e inicia todos os serviços
+# Builds and starts all services
 docker compose up -d --build
 ```
 
-3. **Acesso à Plataforma**
+3. **Access the Platform**
 
-Após a inicialização, acesse:
+After initialization, open:
 - **Dashboard**: [http://localhost:3000](http://localhost:3000)
 - **API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### Componentes
+### Components
 - 🖥️ Frontend: React + Material-UI
 - 🔧 Backend: FastAPI + PostgreSQL
-- 📊 Analytics: Views Materializadas
+- 📊 Analytics: Materialized Views
 - 🐳 Deploy: Docker + Compose
 
-## 🛠️ Desenvolvimento e Testes
+## 🛠️ Development and Testing
 
-### Stack Tecnológica
+### Tech Stack
 - **Frontend**: React 18, Material-UI
 - **Backend**: FastAPI, SQLAlchemy
 - **Database**: PostgreSQL 14
-- **Testes**: Pytest, React Testing Library
+- **Tests**: Pytest, React Testing Library
 - **CI/CD**: Docker, GitHub Actions
 
-### Executando Testes
+### Running Tests
 
-1. **Testes Automatizados**
+1. **Automated Tests**
 ```bash
-# Executa suite completa de testes
+# Runs the full test suite
 docker compose run --rm test
 ```
 
-2. **Cobertura de Testes**
+2. **Test Coverage**
 - ✅ API Endpoints
-- ✅ Lógica de Negócio
-- ✅ Integrações
+- ✅ Business Logic
+- ✅ Integrations
 - ✅ Performance
 
-### Qualidade de Código
-- 📝 TypeScript para tipo seguro
+### Code Quality
+- 📝 TypeScript for type safety
 - 🔍 ESLint + Prettier
-- 🧪 Testes unitários e E2E
-- 🔄 CI/CD automatizado
+- 🧪 Unit and E2E tests
+- 🔄 Automated CI/CD
 
-### Segurança e Estabilidade
-- 🔒 Validação de inputs
+### Security and Stability
+- 🔒 Input validation
 - 🛡️ Rate limiting
-- 📊 Logging e monitoramento
-- 🔄 Backup automático de dados
+- 📊 Logging and monitoring
+- 🔄 Automatic data backup
 
-## 🏛️ Arquitetura e Performance
+## 🏛️ Architecture and Performance
 
-### Visão Geral
-A arquitetura da plataforma foi projetada com foco em performance, escalabilidade e experiência do usuário. Utilizamos uma abordagem moderna que prioriza a eficiência das consultas e a responsividade da interface.
+### Overview
+The platform architecture was designed with a focus on performance, scalability, and user experience. A modern approach that prioritizes query efficiency and interface responsiveness.
 
-### Otimização de Performance
-- **Desafio**: Consultas complexas em um banco de dados com +500k registros
-- **Meta**: Tempo de resposta < 500ms para todas as operações
-- **Benchmark Inicial**: 1.831ms para queries complexas com múltiplos JOINs
+### Performance Optimization
+- **Challenge**: Complex queries on a database with 500k+ records
+- **Goal**: Response time < 500ms for all operations
+- **Initial Benchmark**: 1,831ms for complex queries with multiple JOINs
 
-### Solução Implementada
-- **Views Materializadas**: 
-  - Camada de abstração para dados pré-agregados
-  - Otimização automática de consultas frequentes
-  - Índices estratégicos para performance
+### Implemented Solution
+- **Materialized Views**:
+  - Abstraction layer for pre-aggregated data
+  - Automatic optimization of frequent queries
+  - Strategic indexes for performance
 
-- **Arquitetura em Camadas**:
-  - Frontend React otimizado
-  - API FastAPI com cache inteligente
-  - PostgreSQL com views materializadas
-  - Atualizações automáticas via REFRESH
+- **Layered Architecture**:
+  - Optimized React frontend
+  - FastAPI with intelligent caching
+  - PostgreSQL with materialized views
+  - Automatic updates via REFRESH
 
-### Resultados
-- **Performance**: Redução do tempo de resposta para 122ms
-- **Melhoria**: Otimização de 93% na velocidade das consultas
-- **Escala**: Suporte eficiente para grandes volumes de dados
-- **UX**: Interface responsiva e dados near real-time
+### Results
+- **Performance**: Response time reduced to 122ms
+- **Improvement**: 93% optimization in query speed
+- **Scale**: Efficient support for large data volumes
+- **UX**: Responsive interface with near real-time data
 
 ---
 
-## 📝 Notas de Versão
+## 📝 Release Notes
 
 ### v1.0.0
-- ✨ Lançamento inicial
-- 🎯 Dashboard completo
-- 🤖 Sistema de IA
-- 📊 Relatórios avançados
+- ✨ Initial release
+- 🎯 Complete dashboard
+- 🤖 AI system
+- 📊 Advanced reports
 
-### Próximas Features
-- [ ] Exportação avançada de relatórios
-- [ ] Integrações com sistemas externos
-- [ ] Mobile app companion
-- [ ] Análise preditiva avançada
+### Upcoming Features
+- [ ] Advanced report export
+- [ ] External system integrations
+- [ ] Mobile companion app
+- [ ] Advanced predictive analytics
 
-### Notas de Implementação
-- 🔧 Otimização do gerador de dados
-- 🔄 Correção de dependências circulares
-- ⚡ Melhoria na performance de queries
-- 📈 Escalabilidade aprimorada
+### Implementation Notes
+- 🔧 Data generator optimization
+- 🔄 Circular dependency fixes
+- ⚡ Query performance improvements
+- 📈 Enhanced scalability

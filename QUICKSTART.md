@@ -1,14 +1,13 @@
-# ⚡ Quick Start - 5 Minutos
+# ⚡ Quick Start - 5 Minutes
 
-ATENÇÃO: essa é uma sugestão de setup, não é obrigatório que se rode dessa maneira. O script base para geração de dados está em ./generate_data.py.
+> **Note**: This is a suggested setup. The base script for data generation is at `./generate_data.py`.
 
-## Setup Completo
+## Full Setup
 
 ```bash
 # 1. Clone
-git clone https://github.com/lucasvieira94/nola-god-level.git
-cd nola-god-level
-
+git clone https://github.com/j-victor-oliveira/DashBoard-Interativo-para-restaurantes.git
+cd DashBoard-Interativo-para-restaurantes
 
 docker compose down -v 2>/dev/null || true
 docker compose build --no-cache data-generator
@@ -17,40 +16,40 @@ docker compose run --rm data-generator
 docker compose --profile tools up -d pgadmin
 ```
 
-**Aguarde 5-15 minutos** enquanto 500k vendas são geradas.
+**Wait 5-15 minutes** while 500k sales are generated.
 
-## Verifique
+## Verify
 
 ```bash
 docker compose exec postgres psql -U challenge challenge_db -c 'SELECT COUNT(*) FROM sales;'
 
-# Deve mostrar ~500k
+# Should show ~500k
 ```
 
 ## Explore
 
-Explore os dados gerados da forma como quiser e julgar mais eficiente. Navegue pelas tableas e entenda seus relacionamentos.
+Explore the generated data however you find most efficient. Browse the tables and understand their relationships.
 
-## Estrutura dos Dados
+## Data Structure
 
 ```
 Sale
-├── ProductSale (produtos)
-│   └── ItemProductSale (customizações: +bacon, -cebola)
-├── Payment (formas de pagamento)
+├── ProductSale (products)
+│   └── ItemProductSale (customizations: +bacon, -onion)
+├── Payment (payment methods)
 └── DeliverySale (delivery)
-    └── DeliveryAddress (com lat/long)
+    └── DeliveryAddress (with lat/long)
 ```
 
-**Schema completo**: [DADOS.md](./DADOS.md)
+**Full schema**: [DADOS.md](./DADOS.md)
 
-## Próximos Passos
+## Next Steps
 
-1. **Entenda o problema**: Leia [PROBLEMA.md](./PROBLEMA.md)
-2. **Explore os dados**: Rode queries, veja padrões
-3. **Desenhe solução**: Arquitetura, stack, UX
-4. **Implemente**: Resolva o problema!
+1. **Understand the problem**: Read [PROBLEMA.md](./PROBLEMA.md)
+2. **Explore the data**: Run queries, look for patterns
+3. **Design the solution**: Architecture, stack, UX
+4. **Implement**: Solve the problem!
 
 ---
 
-**Setup completo! Hora de codar. 🚀**
+**Setup complete! Time to code. 🚀**

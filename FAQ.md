@@ -1,125 +1,86 @@
-# ❓ FAQ - God Level Coder Challenge
+# ❓ FAQ
 
-## Sobre o Desafio
+## About the Project
 
-### Quanto tempo devo investir?
+### How long did this take to build?
 
-O prazo é 1 semana, mas você decide o esforço. Candidatos top geralmente investem 40-80 horas. Qualidade > quantidade.
+The project was built in approximately one week, with a focus on quality over quantity.
 
-## Tecnologias
+## Technologies
 
-### Posso usar frameworks/libraries?
+### Can I use this project as a reference?
 
-Sim! Use o que faz sentido. Não reinvente a roda. Mas entenda o que está usando.
+Yes! Use it as you see fit. Just make sure you understand what is being used.
 
-### Preciso fazer do zero?
+### Was this built from scratch?
 
-Idealmente sim, construir um dashboard em PowerBI ou no Metabase não resolveria a dor do usuário completamente.
+Yes, the dashboard was built from scratch to fully address the user's needs.
 
-### Frontend e backend são obrigatórios?
+### Are frontend and backend both required?
 
-Sim. A solução precisa de interface visual para o usuário explorar dados. Precisamos também ser capazes de agregar os dados além do SQL.
+Yes. The solution needs a visual interface for the user to explore data. Data aggregation beyond SQL is also needed.
 
-## Dados
+## Data
 
-### Como obtenho os dados?
+### How do I get the data?
 
-Clone o repositório e rode o script / docker compose para geração dos dados.
+Clone the repository and run the script / docker compose to generate the data.
 
-### Posso gerar mais dados?
+### Can I generate more data?
 
-Sim, use o script `generate_data.py` com parâmetros diferentes.
+Yes, use the `generate_data.py` script with different parameters.
 
-### Os dados são realistas?
+### Is the data realistic?
 
-Mias ou menos. Baseados em tentativa de reproduzir padrões reais de 50+ restaurantes. Incluem sazonalidade, anomalias, distribuições reais.
+More or less. Based on an attempt to reproduce real patterns from 50+ restaurants. Includes seasonality, anomalies, and real distributions.
 
-## Implementação
+## Implementation
 
-### Preciso fazer drag-and-drop?
+### Is drag-and-drop implemented?
 
-Não é obrigatório. Se você tem uma forma melhor de criar dashboards customizados, mostre.
+Not mandatory. There is a better way to create custom dashboards.
 
-### Preciso fazer query builder visual?
+### Is a visual query builder implemented?
 
-Novamente, não é obrigatório. Se há uma forma melhor de permitir exploração de dados, implemente.
+Not as a separate feature. Data exploration is done through the dashboard's built-in filters and report builder.
 
-### Quanto de features avançadas?
+### How many advanced features are included?
 
-Foque em resolver o problema core MUITO bem. Features extras são bonus, não requisito.
+The focus was on solving the core problem very well. Extra features are bonuses, not requirements.
 
-### Preciso fazer autenticação?
+### Is authentication required?
 
-Não.
+No authentication was implemented for this project.
 
-### Queries precisam ser rápidas mesmo?
+### Are queries fast?
 
-Sim. 500ms para queries complexas é esperado. 2+ segundos é inaceitável. Performance importa.
+Yes. 500ms for complex queries is the target. 2+ seconds is unacceptable. Performance matters.
 
-## Entrega
+## Setup
 
-### O vídeo é obrigatório?
+### Is a video walkthrough available?
 
-Sim. Queremos ver você explicando sua solução. 5-10 minutos é suficiente.
+Not currently, but the README provides a complete setup guide.
 
-### Preciso fazer deploy?
+### Do I need to deploy it?
 
-Não obrigatório, mas valorizado. Se não fizer, garanta que `docker compose up` funciona perfeitamente.
+Not required. Running `docker compose up` works perfectly locally.
 
-### E se não funcionar primeiro try?
+### What if it doesn't work on the first try?
 
-Tenha instruções MUITO claras no README. "Clone, docker compose up, acesse localhost:3000" deve funcionar.
+Follow the instructions in the README: "Clone, docker compose up, access localhost:3000".
 
-## Avaliação
+## Architecture
 
-### Vocês preferem tecnologia X?
+### Why this tech stack?
 
-Não. Preferimos **boa engenharia** independente da stack.
+Good engineering was prioritized over any specific technology. The choices were made based on what made sense for the problem.
 
-### Se eu usar tech desconhecida para vocês?
+### Can I use unfamiliar technologies?
 
-Documente bem. Se a escolha faz sentido e o código é bom, pontos ganhos.
+Yes, as long as the code is well-documented and the choices make sense.
 
-### Posso copiar código de libs open source?
+### Can I use open source library code?
 
-Sim, mas dê créditos. Não copie soluções de outros participantes.
-
-## Suporte
-
-### Posso fazer perguntas durante?
-
-Sim! Discord e email estão abertos.
-
-### Vocês dão dicas de implementação?
-
-Esclarecemos o problema e dados. Não damos dicas de solução (seria injusto).
-
-### E se encontrar bug nos dados?
-
-Reporte no Discord. Debateremos o problema e possíveis correções, não tenha apreço aos detalhes nos dados -> boas visualizações e bons backends serão efetivamente considerados embora os dados não estejam perfeitos.
-
-## Premiação
-
-### Posso recusar a vaga e ficar só com o prêmio?
-
-Não.
-
-### Quando recebo o prêmio?
-
-3 meses após entrada no time.
-
-## Ética
-
-### Posso trabalhar em equipe?
-
-Não. Desafio é individual. Mas pode discutir conceitos gerais no Discord com a equipe do Nola.
-
-### Posso usar AI para me ajudar no código?
-
-Sim, como ferramenta. Mas você deve entender e defender cada linha de código.
-
-### E se eu colar de outro participante?
-
-Desqualificação imediata. Temos detecção de similaridade.
-
+Yes, with proper credits. Do not copy solutions from other developers.
 
